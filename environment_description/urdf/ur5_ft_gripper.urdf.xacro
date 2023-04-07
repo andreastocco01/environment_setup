@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="workcell">
+  <!--Load the macro for creating a UR5-->
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur5_macro.xacro"/>
+  <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_ft300.urdf.xacro" />
+  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model_macro.xacro" />
+
+  <!--Instanciate the UR5-->
+  <xacro:ur5_robot prefix="" />
+
+  <xacro:robotiq_ft300 parent="tool0" prefix="">
+    <origin xyz="0 0 0" rpy="0 0 0"/> 
+  </xacro:robotiq_ft300>
+
+  <xacro:robotiq_arg2f_85  prefix="" />
+
+  <!-- Define materials -->
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <!-- Define mount link -->
+  <link name="mount">
+    <visual>
+      <origin xyz="0 0 0.45" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.4 0.9"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.45" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.4 0.9"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="table">
+    <visual>
+      <origin xyz="0 0 0.45" rpy="0 0 0"/>
+      <geometry>
+        <box size="1 0.785 0.9"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.45" rpy="0 0 0"/>
+      <geometry>
+        <box size="1 0.785 0.9"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wall">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="2 0.01 2"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="2 0.01 2"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="table_to_wall" type="fixed">
+    <parent link="table"/>
+    <child link="wall"/>
+    <origin xyz="0 -0.3925 0.9"/>
+  </joint>
+
+  <joint name="mount_to_table" type="fixed">
+    <parent link="mount"/>
+    <child link="table"/>
+    <origin xyz="0 -0.5925 0"/>
+  </joint>
+  
+
+  <!--The robot will be on the top surface of the box in the center-->
+  <joint name="mount_to_robot" type="fixed">
+    <parent link="mount" />
+    <child link = "base_link" />
+    <origin xyz="0 0 0.9" rpy="0 0 0" />
+  </joint>
+
+  <joint name="sensor_to_gripper" type="fixed">
+    <parent link="robotiq_ft_frame_id" />
+    <child link = "robotiq_arg2f_base_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+</robot>
