@@ -19,6 +19,6 @@
     
     <!-- Run rviz-->
     <!-- TODO: rviz config <...... args="-d $(find ur_robot_driver)/resources/example_rviz_config.rviz"....../>  -->
-    <node name="rviz" pkg="rviz" type="rviz" respawn="false" output="screen"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find environment_manager)/config/rviz_mount_moveit.rviz" respawn="false" output="screen"/>
             
 </launch>
