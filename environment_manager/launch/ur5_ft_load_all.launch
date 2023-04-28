@@ -20,5 +20,8 @@
     <!-- Run rviz-->
     <!-- TODO: rviz config <...... args="-d $(find ur_robot_driver)/resources/example_rviz_config.rviz"....../>  -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find environment_manager)/config/rviz_mount_moveit.rviz" respawn="false" output="screen"/>
-            
+
+    <!-- Run Robotiq listener-->
+    <node name="rq_sensor" pkg="robotiq_ft_sensor" type="rq_sensor" args="/dev/ttyUSB0" />
+
 </launch>
