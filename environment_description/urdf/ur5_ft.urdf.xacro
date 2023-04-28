@@ -9,7 +9,7 @@
   <xacro:ur5_robot prefix="" />
 
   <xacro:robotiq_ft300 parent="tool0" prefix="">
-    <origin xyz="0 0 0" rpy="0 0 0"/> 
+    <origin xyz="0 0 0" rpy="0 0 -1.5447"/> 
   </xacro:robotiq_ft300>
 
   <!-- <xacro:robotiq_arg2f_85  prefix="" /> -->
