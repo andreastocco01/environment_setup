@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="kinematics_params" default="$(find ur_description)/config/ur5/default_kinematics.yaml"/>
+  <param name="robot_description" command="xacro '$(find environment_description)/urdf/ur5_ft_gripper.urdf.xacro'
+                kinematics_params:=$(arg kinematics_params)" />
+
+</launch>

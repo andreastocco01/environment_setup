@@ -3,7 +3,7 @@
 
     <arg name="robot_ip" default="192.168.53.3"/>
     <!-- Load ur5 driver which will load robot description to parameter server-->
-    <include file="$(find environment_manager)/launch/ur5_ft_bringup_driver.launch">
+    <include file="$(find environment_manager)/launch/ur5_ft_gripper_bringup_driver.launch">
         <arg name="robot_ip" default="192.168.53.3"/>
     </include>
 
@@ -12,7 +12,7 @@
     <!--<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>-->
 
     <!-- Start move group from moveit-->
-    <include file="$(find ur5_ft_moveit_config)/launch/move_group.launch"/>
+    <include file="$(find ur5_ft_gripper_moveit_config)/launch/move_group.launch"/>
             <!-- The move group will load:-->
             <!-- planning_context.launch    which will set the parameters needed for moveit to load-->
             <!-- OMPL, CHOMPL, PILZ and custom planning pipeline    which will set the parameters needed for moveit to load-->

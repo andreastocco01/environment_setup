@@ -3,7 +3,6 @@
   <!--Load the macro for creating a UR5-->
   <xacro:include filename="$(find ur_description)/urdf/inc/ur5_macro.xacro"/>
   <xacro:include filename="$(find robotiq_ft_sensor)/urdf/robotiq_ft300.urdf.xacro" />
-  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model_macro.xacro" />
 
   <!--Instanciate the UR5-->
   <xacro:ur5_robot prefix="" />
@@ -11,8 +10,6 @@
   <xacro:robotiq_ft300 parent="tool0" prefix="">
     <origin xyz="0 0 0" rpy="0 0 0"/> 
   </xacro:robotiq_ft300>
-
-  <xacro:robotiq_arg2f_85  prefix="" />
 
   <!-- Define materials -->
   <material name="white">
@@ -79,7 +76,6 @@
     <child link="table"/>
     <origin xyz="0 -0.5925 0"/>
   </joint>
-  
 
   <!--The robot will be on the top surface of the box in the center-->
   <joint name="mount_to_robot" type="fixed">
@@ -88,10 +84,21 @@
     <origin xyz="0 0 0.9" rpy="0 0 0" />
   </joint>
 
-  <joint name="sensor_to_gripper" type="fixed">
+  <xacro:include filename="$(find ur3_sim_description)/urdf/gripper.xacro" />
+  <xacro:gripper />
+
+  <link name="tool_gripper" />
+
+  <joint name="tool_gripper_joint" type="fixed">
     <parent link="robotiq_ft_frame_id" />
-    <child link = "robotiq_arg2f_base_link" />
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <child link = "tool_gripper" />
+    <origin xyz="-0.02 0.01 0.085" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <joint name="prova" type="fixed">
+    <parent link="tool_gripper" />
+    <child link = "base_bottom" />
+    <origin xyz="0.0 0.0 0.0" rpy="1.57079632679 0.0 0.0" />
   </joint>
 
 </robot>
